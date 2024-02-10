@@ -35,13 +35,17 @@ El servidor se ejecutará en http://localhost:9090.
 
 ## Manual de la API
 ### Registrarse
-- URL: `/api/user/registro`
-- Método: `POST`
-| Parámetros de Entrada | Tipo     |
-| ---------------------- | -------- |
-| `nombre`               | `String` |
-| `email`                | `String` |
-| `contrasena`           | `String` |
-| `rol`                  | `Programador` o `Administrador` |
+```http
+  POST /api/user/registro
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `nombre` | `string` | **Required**. Nombre de usuario |
+| `email` | `string` | **Required**. Email del usuario|
+| `contrasena` | `string` | **Required**. Contraseña del usuario |
+| `rol` | `string` | **Required**. Rol del usuario. Administrador o Programador |
+
+
 ### Inicio de Sesión
 ### Información del usuario
