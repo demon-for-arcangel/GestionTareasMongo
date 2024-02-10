@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const bycript = require('bycript');
 
 const userSchema = new mongoose.Schema({
-    nombre: {type: String, required: true, unique: true, trim: true},
+    nombre: {type: String, required: true, trim: true},
+    email: {type: String, required:true, unique: true, trim: true},
     contrasena: {type: String, required: true, trim: true},
     rol: {type: String, enum: ['administrador', 'programador'], required: true},
     tareas: {type: mongoose.Schema.Types.ObjectId, ref: 'tareas'}

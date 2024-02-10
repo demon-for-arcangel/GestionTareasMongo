@@ -7,7 +7,8 @@ class Serve {
     constructor() {
         this.app = express();
         this.adminPath = '/api/admin';
-        this.programadorPath = '/api/programador';
+        this.userPath = '/api/user';
+        this.tareasPath = '/api/tareas'
 
         this.middlewares();
         this.conectarMongoose();
@@ -32,7 +33,8 @@ class Serve {
 
     routes() {
         this.app.use(this.adminPath, require('../routes/adminRoutes'));
-        this.app.use(this.programadorPath, require('../routes/programadorRoutes'));
+        this.app.use(this.userPath, require('../routes/userRoutes'));
+        this.app.use(this.tareasPath, require('../routes/tareasRoutes'));
     }
 
     listen() {
