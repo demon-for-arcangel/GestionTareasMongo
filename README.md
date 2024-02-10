@@ -24,7 +24,7 @@ PORT=3000
 DB_URL=tu-url-de-mongodb
 DB_PORT=27017
 DB_DATABASE=tu-nombre-de-base-de-datos
-SECRETORPRIVATEKEY=tu-clave-secreta-para-generar-tokens
+JWT_SECRET=tu-clave-secreta-para-generar-tokens
 ```
 
 4. Ejecutar el servidor

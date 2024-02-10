@@ -56,18 +56,25 @@ const UserController = {
 
     modificarContrasena: async (req, res) => {
         try {
-            const { user } = req;
+            const { userId } = req.params; 
             const { antiguaContrasena, nuevaContrasena } = req.body;
-
+    
+            const user = await User.findById(userId);
+    
+            if (!user) {
+                return res.status(404).json({ message: 'Usuario no encontrado.' });
+            }
+    
             const verificar = await user.comparePassword(antiguaContrasena);
-            if (!verificar){
+            if (!verificar) {
                 return res.status(401).json({ message: 'Contraseña incorrecta' });
             }
-
+    
             user.contrasena = nuevaContrasena;
             await user.save();
+    
             res.json({ message: 'Contraseña actualizada con éxito.' });
-        } catch (error){
+        } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Error en el servidor.' });
         }
