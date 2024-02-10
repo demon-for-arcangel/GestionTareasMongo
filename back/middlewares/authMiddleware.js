@@ -1,20 +1,21 @@
 const jwt = require('jsonwebtoken');
-const { SECRET_KEY } = process.env.SECRET_KEY;
 
-const authMiddleware = (req, res, next) => {
-    const token = req.header('Authorization');
+function authMiddleware(req, res, next) {
+    const token = req.headers['x-token'];
 
-    if (!token){
-        return res.status(401).json({ message: 'Acceso no autorizado. Token no proporcionado.' });
+    if (!token) {
+        return res.status(401).json({ message: 'Token no proporcionado' });
     }
 
-    try{
-        const decode = jwt.verify(token, SECRET_KEY);
-        req.user = decode.user;
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Token no válido' });
+        }
+
+        req.user = decoded;
+
         next();
-    }catch (error){
-        return res.status(401).json({ messaje: 'Token no válido' });
-    }
+    });
 }
 
 module.exports = authMiddleware;

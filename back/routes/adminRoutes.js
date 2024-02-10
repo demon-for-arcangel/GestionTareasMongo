@@ -8,3 +8,5 @@ router.get('/tareas-realizadas', authMiddleware, AdminController.getTareasComple
 router.get('/tareas-incompletas', authMiddleware, AdminController.getTareasIncompletas);
 router.get('/tareas-programador/:userId', authMiddleware, AdminController.getTareasProgramador);
 router.post('/asignar-tarea', authMiddleware, AdminController.asignarTareaAlMejor);
+
+module.exports = router;

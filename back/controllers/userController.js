@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const { SECRET_KEY } = process.env.SECRET_KEY;
+const { SECRET_KEY } = process.env; // Se corrige la obtención de SECRET_KEY
 
 const UserController = {
     registro: async (req, res) => {
@@ -9,14 +9,14 @@ const UserController = {
 
             const existe = await User.findOne({ email });
             if (existe){
-                return res.status(400).json({ message: 'El nombre de usuario ya existe.' });
+                return res.status(400).json({ message: 'El correo electrónico ya existe.' });
             }
 
             const nuevo = new User({ nombre, email, contrasena, rol });
             await nuevo.save();
 
             res.status(201).json({ user: nuevo });
-        }catch (error) {
+        } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Error en el servidor' });
         }
@@ -36,38 +36,38 @@ const UserController = {
                 return res.status(401).json({ message: 'Contraseña incorrecta' });
             }
 
-            const token = jwt.sign({ user }, SECRET_KEY);
-            res.json({ token, user })
-        }catch (error){
+            const token = generarJWT({ user }, JWT_SECRET);
+            res.json({ token, user });
+        } catch (error){
             console.error(error);
             res.status(500).json({ message: 'Error en el servidor.' });
         }
     },
 
     getUsuario: async (req, res) => {
-        try{
+        try {
             const { user } = req;
             res.json({ user });
-        }catch (error){
+        } catch (error){
             console.error(error);
-            res.status(500).json({ message: 'Error en el servidor' })
+            res.status(500).json({ message: 'Error en el servidor' });
         }
     },
 
     modificarContrasena: async (req, res) => {
-        try{
+        try {
             const { user } = req;
             const { antiguaContrasena, nuevaContrasena } = req.body;
 
             const verificar = await user.comparePassword(antiguaContrasena);
             if (!verificar){
-                res.status(401).json({ message: 'Contraseña incorrecta' });
+                return res.status(401).json({ message: 'Contraseña incorrecta' });
             }
 
             user.contrasena = nuevaContrasena;
             await user.save();
             res.json({ message: 'Contraseña actualizada con éxito.' });
-        }catch (error){
+        } catch (error){
             console.error(error);
             res.status(500).json({ message: 'Error en el servidor.' });
         }

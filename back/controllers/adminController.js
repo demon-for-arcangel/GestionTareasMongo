@@ -1,4 +1,4 @@
-const User = require('..models/User');
+const User = require('../models/User');
 const Tarea = require('../models/Tarea');
 const asignacionTareas = require('../utils/AlgoritmoAsignacionTarea');
 

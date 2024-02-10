@@ -3,12 +3,12 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 
-class Serve {
+class Server {
     constructor() {
         this.app = express();
         this.adminPath = '/api/admin';
         this.userPath = '/api/user';
-        this.tareasPath = '/api/tareas'
+        this.tareasPath = '/api/tareas';
 
         this.middlewares();
         this.conectarMongoose();
@@ -23,7 +23,9 @@ class Serve {
 
         this.db = mongoose.connection;
         this.db.on('error', console.error.bind(console, 'Error de conexión a MongoDB:'));
-        this.db.once('open', ()=>{console.log('Conexión exitosa a MongoDB');})
+        this.db.once('open', () => {
+            console.log('Conexión exitosa a MongoDB');
+        });
     }
 
     middlewares() {
@@ -32,14 +34,20 @@ class Serve {
     }
 
     routes() {
-        this.app.use(this.adminPath, require('../routes/adminRoutes'));
-        this.app.use(this.userPath, require('../routes/userRoutes'));
-        this.app.use(this.tareasPath, require('../routes/tareasRoutes'));
+        const adminRoutes = require('../routes/adminRoutes');
+        const userRoutes = require('../routes/userRoutes');
+        const tareasRoutes = require('../routes/tareaRoutes');
+
+        this.app.use(this.adminPath, adminRoutes);
+        this.app.use(this.userPath, userRoutes);
+        this.app.use(this.tareasPath, tareasRoutes);
     }
 
     listen() {
         this.app.listen(process.env.PORT, () => {
-            console.log(`Servidor escuchando en: ${process.env.PORT}`)
-        })
+            console.log(`Servidor escuchando en: ${process.env.PORT}`);
+        });
     }
 }
+
+module.exports = Server;

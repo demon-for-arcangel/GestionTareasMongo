@@ -1,0 +1,47 @@
+# API de Gestión de Tareas
+
+Bienvenido a la documentación de la API de Gestión de Tareas. A continuación, encontrarás información sobre cómo utilizar los diferentes endpoints de la API.
+
+## Inicio Rápido
+
+### Instalación
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/tu-usuario/tu-repo.git
+cd tu-repo
+```
+
+2. Instala las dependencias:
+```bash
+npm install
+```
+
+3. Crea un archivo .env en el directorio raíz y configura las siguientes variables:
+```node
+PORT=3000
+DB_URL=tu-url-de-mongodb
+DB_PORT=27017
+DB_DATABASE=tu-nombre-de-base-de-datos
+SECRETORPRIVATEKEY=tu-clave-secreta-para-generar-tokens
+```
+
+4. Ejecutar el servidor
+```node
+nodemon
+```
+El servidor se ejecutará en http://localhost:9090.
+
+## Manual de la API
+### Registrarse
+- URL: `/api/user/registro`
+- Método: `POST`
+| Parámetros de Entrada | Tipo     |
+| ---------------------- | -------- |
+| `nombre`               | `String` |
+| `email`                | `String` |
+| `contrasena`           | `String` |
+| `rol`                  | `Programador` o `Administrador` |
+### Inicio de Sesión
+### Información del usuario
