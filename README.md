@@ -39,13 +39,25 @@ El servidor se ejecutará en http://localhost:9090.
   POST /api/user/registro
 ```
 
-| Parameter | Type     | Description                |
+| Parametro | Tipo     | Description                |
 | :-------- | :------- | :------------------------- |
 | `nombre` | `string` | **Required**. Nombre de usuario |
 | `email` | `string` | **Required**. Email del usuario|
 | `contrasena` | `string` | **Required**. Contraseña del usuario |
 | `rol` | `string` | **Required**. Rol del usuario. Administrador o Programador |
 
-
 ### Inicio de Sesión
+```http
+  POST /api/user/login
+```
+| Parametro | Tipo    | Descripcion                    |
+| :-------- | :------ | :----------------------------- |
+| `email` | `string` | **Required**.Email del usuario |
+| `contrasena` | `string` | **Required**. Contraseña del usuario |
+
 ### Información del usuario
+
+
+| Parametro | Tipo    | Descripcion                    |
+| :-------- | :------ | :----------------------------- |
+| | |
